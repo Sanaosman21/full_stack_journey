@@ -1,11 +1,13 @@
 function sum(num1,num2){
    result=num1+num2
-  return result 
+  return displayresult(result)
 }
 function displayresult(data)
 {
   console.log("result is:" ,data)
 
 }
-let value =sum(2)
-console.log(value)
+function displayresultpassive(data){
+  console.log("sum's result is :", data)
+}
+sum(4,5)
