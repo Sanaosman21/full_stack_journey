@@ -61,4 +61,5 @@ const course={
     courseintructor:"sana"
 }
 const {price:cost}=course
-console.log(cost)
+// console.log(price)
+// console.log(cost)

@@ -13,3 +13,12 @@ function pushExample(arr, element) {
   console.log("After push:", arr);
 }
 pushExample([1, 2, 3], 4);
+
+//pop
+function pushExample(arr) {
+  console.log("Original Array:", arr);
+
+  arr.pop();
+  console.log("After push:", arr);
+}
+pushExample()

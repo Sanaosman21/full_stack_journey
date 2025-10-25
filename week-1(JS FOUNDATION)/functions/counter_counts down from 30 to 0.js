@@ -17,7 +17,7 @@
 //   console.log(end)
 //   console.log(end - start); // This will show the time elapsed—in milliseconds
 // }, 1000); // Expected ~1000 ms
-
+ //Create a terminal clock (HH:MM:SS
 function pad(num) {
   return num < 10 ? '0' + num : num;
 }
