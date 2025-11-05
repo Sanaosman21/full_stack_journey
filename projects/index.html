@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Notes Manager</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #ffe3ee;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff0f6;
+      margin-top: 40px;
+      margin-bottom:200px;
+      padding: 30px 40px;
+      box-shadow: 0 6px 32px rgba(245,91,182,0.13);
+      border-radius: 12px;
+      width: 500px;
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #ff2996;
+      font-size: 2em;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    #notesList {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 25px;
+    }
+    #notesList li {
+      background: #ffd0ea;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      padding: 14px 16px;
+      transition: background 0.21s;
+      font-size: 1.08em;
+    }
+    #notesList li:hover {
+      background: #ffc0e0;
+    }
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    #noteInput {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #ff90c2;
+      border-radius: 8px;
+      font-size: 1em;
+      outline: none;
+      transition: border 0.21s;
+      background: #ffeaf5;
+    }
+    #noteInput:focus {
+      border-color: #ff2996;
+    }
+    #addNoteBtn {
+      background: linear-gradient(to right, #ff2996, #fa85c6);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.21s;
+      box-shadow: 0px 2px 10px #ff90c245;
+    }
+    #addNoteBtn:hover {
+      background: linear-gradient(to right, #fa85c6, #ff2996);
+    }
+    .message {
+      text-align: center;
+      margin-bottom: 12px;
+      font-size: 1.04em;
+      color: #c445a7;
+    }
+    .error {
+      color: #b10a5c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1> Sana Notes</h1>
+    <ul id="notesList"></ul>
+    <div class="input-row">
+      <input type="text" id="noteInput" placeholder="Type a new note..." autocomplete="off" />
+      <button id="addNoteBtn">Add</button>
+    </div>
+    <div class="message" id="message"></div>
+  </div>
+<script>
+  const notesList = document.getElementById("notesList");
+  const noteInput = document.getElementById("noteInput");
+  const addNoteBtn = document.getElementById("addNoteBtn");
+  const messageDiv = document.getElementById("message");
+
+  // REPLACE this function with the new one from my previous message
+  async function fetchNotes() {
+    showMessage("Loading notes...");
+    try {
+      const response = await fetch("http://localhost:3000/notes");
+      const notes = await response.json();
+      notesList.innerHTML = "";
+      if (notes.length === 0) {
+        notesList.innerHTML = "<li>No notes yet.</li>";
+      }
+      notes.forEach(note => {
+        const li = document.createElement("li");
+        li.textContent = note.text;
+        // Add a delete (X) button
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "✖";
+        delBtn.style.marginLeft = "12px";
+        delBtn.style.background = "#ff91b2";
+        delBtn.style.border = "none";
+        delBtn.style.color = "#fff";
+        delBtn.style.padding = "2px 8px";
+        delBtn.style.borderRadius = "6px";
+        delBtn.style.cursor = "pointer";
+        delBtn.onclick = async () => {
+          await deleteNote(note.id);
+        };
+        li.appendChild(delBtn);
+        notesList.appendChild(li);
+      });
+      showMessage("");
+    } catch (error) {
+      showMessage("Could not load notes.", true);
+    }
+  }
+
+  // ADD this function just after fetchNotes
+  async function deleteNote(noteId) {
+    showMessage("Removing note...");
+    try {
+      const response = await fetch(`http://localhost:3000/notes/${noteId}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) throw new Error("Failed to delete");
+      fetchNotes();
+    } catch (error) {
+      showMessage("Could not remove note.", true);
+    }
+  }
+
+  // No change needed below this line
+  addNoteBtn.onclick = async () => {
+    const text = noteInput.value.trim();
+    if (!text) {
+      showMessage("Please enter a note!", true);
+      return;
+    }
+    showMessage("Adding note...");
+    try {
+      const response = await fetch("http://localhost:3000/notes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      if (!response.ok) throw new Error("Failed to add");
+      noteInput.value = "";
+      fetchNotes();
+    } catch (error) {
+      showMessage("Could not add note.", true);
+    }
+  };
+
+  function showMessage(msg, isError = false) {
+    messageDiv.textContent = msg;
+    messageDiv.className = isError ? "message error" : "message";
+  }
+
+  // Initial fetch
+  fetchNotes();
+</script>
+
+</body>
+</html>
