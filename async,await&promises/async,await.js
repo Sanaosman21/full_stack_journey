@@ -15,3 +15,4 @@ async function main(){
   console.log(value)
 }
 main()
+console.log("after main")

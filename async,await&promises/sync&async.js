@@ -1,25 +1,25 @@
-// console.log("hello world");
-// let a=0
-// function calculatesum(){
-//     for(let i=0;i<=10;i++){
-//         a=a+1
-//     }
-//     console.log(a)
-// }
-// calculatesum()
-// console.log("hello world")
-// setTimeout(function(){
-//     console.log("from inside async function")
-// },2000);//after completing 
-// setTimeout(function(){
-//     console.log("from inside async function2")
-// },1000);
-//  let a=0
+console.log("hello world");
+let a=0
+function calculatesum(){
+    for(let i=0;i<=10;i++){
+        a=a+1
+    }
+    console.log(a)
+}
+calculatesum()
+console.log("hello world")
+setTimeout(function(){
+    console.log("from inside async function")
+},2000);//after completing 
+setTimeout(function(){
+    console.log("from inside async function2")
+},1000);
+ let a1=0
  
-// for(let i=0;i<=10;i++){
-//        a=a+1
-//     }
-// console.log(a)
+for(let i=0;i<=10;i++){
+       a=a+1
+    }
+console.log(a)
 
 //promises 
 const promise1=new Promise(function(resolve,reject){
@@ -87,6 +87,7 @@ const promise5=new Promise(function(resolve,reject){
 
     },1000)
 })
+//async and await
 async function consume(){
    try{
     const repsonse =await promise5
