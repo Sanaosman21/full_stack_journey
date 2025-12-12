@@ -11,11 +11,11 @@ for(let i=0;i<=2000000;i++)
 console.log(a)
 
 console.log("heyy! osman")
-// const fs =require("fs")
-// fs.readFile("a.txt","utf-8",
-//     function(err,data){
-//         console.log(err)
-//         console.log(data)
-//     }
-// )
-// console.log("done")
+const fs =require("fs")
+fs.readFile("a.txt","utf-8",
+    function(err,data){
+        console.log(err)
+        console.log(data)
+    }
+)
+console.log("done")

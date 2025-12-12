@@ -59,7 +59,11 @@ app.get('/files', function (req, res) {
     if (err) {
         return res.status(500).json({ error: 'Failed to retrieve files' });
     }
-    res.json(files);
+    //to retrurn only txt extension files and ignore rest 
+    //use filter on files 
+    // const txtfiles=files.filter(name=>name.endsWith('.txt'))
+    // res.json(txtfiles);
+    res.json(files)
     });
 });
 
@@ -82,3 +86,19 @@ module.exports = app;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+//Create a new route that returns the size (in bytes) of a given file instead of its content.
+app.get("/file-size/:filename",(req,res)=>{
+  const filepath=path.join(filesDir, req.params.filename)
+  fs.stat(filepath,(err,stats)=>{
+    if(err){
+        return res.status(404).send("file not found")
+    }
+    res.json({
+        filename:req.params.filename,
+        size:stats.size
+    })
+  })
+})
+
+
+
