@@ -6,7 +6,7 @@ app.post("/health-checkup",function(req,res){
     const kidneyLength=kidneys.length;
     res.send("you have "+ kidneyLength +"kidneys")
 });
-//global catches 
+//global catches :help you give the user a better error message "error handling middleware" here 
 app.use(function(err,req,res,next){
     res.json({
         msg:"sorry something went wrong"

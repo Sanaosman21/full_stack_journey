@@ -11,3 +11,5 @@ console.log(req.body);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+///how to link frontend and backend 
+//using fetch(web api)

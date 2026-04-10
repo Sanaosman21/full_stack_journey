@@ -1,9 +1,8 @@
 {
-  "name": "express",
+  "name": "mini_message_board",
   "version": "1.0.0",
-  "main": "indes.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "node --watch p_que_queries.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,9 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0",
-    "express-rate-limit": "^8.2.1",
-    "mongoose": "^8.20.4",
-    "zod": "^4.2.1"
+    "ejs": "^4.0.1",
+    "express": "^5.2.1"
   }
 }

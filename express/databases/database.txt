@@ -1,0 +1,6 @@
+database store data data separate from the backend server 
+multiple type of databases 
+sql,nosql,vector ,graph ..
+today we will learn about the nosql 
+how to connect node to the mongodb? it uses some libraries like mongoose ,http server , 
+mongoose.connect 

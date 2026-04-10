@@ -1,0 +1,3 @@
+other use case of middlewares(assigmnets)=
+1.count the number of req
+find the average time your server is taking to handle requests

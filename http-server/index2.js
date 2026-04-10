@@ -1,7 +1,7 @@
 //rest api(this thing has been exposed) ,http 
 const express = require('express')
 const app = express()//intsance of express give you back app object
-const bodyParser=require("body-parser")
+
 const port = 3000
 app.use(bodyParser.json())
 app.get("/route-handler",function(req,res){

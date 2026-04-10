@@ -7,17 +7,35 @@
 </head>
 <script>
 function populateDiv(){
-    const a=document.getElementById("firstnumber").value
-    const b=document.getElementById("secondnumber").value
-    const element=document.getElementById("finalsum");
+    // const a=document.getElementById("firstnumber").value
+    // const b=document.getElementById("secondnumber").value
+    // const element=document.getElementById("finalsum");
 
-    element.innerHTML=parseInt(a)+parseInt(b)
+    // // element.innerHTML=parseInt(a)+parseInt(b)
+    // //fetch 
+    // fetch("http://localhost:3000/sum?a=" + a + "&b="+b)
+    // .then(function(response){
+    //     console.log(response)
+    //     response.text()
+    //     .then(function(ans){
+    //         console.log(ans)
+    //     })
+    // })
+     const a = document.getElementById("firstnumber").value;
+    const b = document.getElementById("secondnumber").value;
+    const element = document.getElementById("finalsum");
+
+    fetch(`http://localhost:3000/sum?a=${a}&b=${b}`)
+    .then((response) => response.text())   // 🔥 return needed
+    .then((ans) => {
+        element.innerHTML = ans;          // show result
+    })
 }
 </script>
 <body><br>
-    <input id="firstnumber" type="text" placeholder="first number"></input><br><br><br>
-     <input id="secondnumber" type="text" placeholder="second number"></input><br><br><br>
-     <button onclick="populateDiv()" >calculate sum</button>
+    <input oninput="populateDiv()" id="firstnumber" type="text" placeholder="first number"></input><br><br><br>
+     <input oninput="populateDiv()" id="secondnumber" type="text" placeholder="second number"></input><br><br><br>
+     <!-- <button onclick="populateDiv()" >calculate sum</button> -->
      <div id="finalsum"></div>
 </body>
 </html>
