@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+#container {
+    width: 300px;                 /* give box a fixed size */
+    margin: 100px auto;           /* center horizontally */
+    padding: 20px;                /* equal spacing inside */
+    border: 2px solid rgb(100, 173, 111);
+    border-radius: 10px;          /* rounded corners */
+    text-align: center;           /* center text inside */
+}
+</style>
+<script>
+    function populateDiv(){
+        const principal=document.getElementById("principal").value
+        const rate=document.getElementById("rate").value
+        const time=document.getElementById("time").value
+        const element=document.getElementById("si")
+
+        fetch(`http://localhost:3000/simpleinterest?p=${principal}&r=${rate}&t=${time}`)
+        .then((response)=> response.text())
+        .then((ans)=>{
+        element.innerHTML=ans})
+    }
+    </script>
+
+<body>
+  <div id="container">
+        <input oninput=populateDiv() id="principal" type="text" placeholder="principal"></input><br><br><br>
+         <input oninput=populateDiv() id="rate" type="text" placeholder="rate"></input><br><br><br>
+          <input oninput=populateDiv() id="time" type="text" placeholder="time"></input><br><br><br>
+        <div id="si"></div>
+    </div>
+</body>
+</html>
