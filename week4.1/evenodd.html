@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #container{
+        width:300px;
+        padding:30px;
+        margin:200px auto;
+        border:2px solid purple;
+        border-radius:5px;
+        text-align: center;
+}
+#number{
+    height: 30px;
+    border:1.5px solid black;
+}
+#check{
+    background-color: rgb(106, 106, 214);
+    width:90px;
+    height:30px;
+    border-radius: 20px;
+    border:2px solid rgb(106, 106, 214);
+    
+}
+#check:hover {
+    background-color: blue;
+    color: white;
+}
+  </style>
+   <div id="container">
+        <input id="number" type="number" placeholder="enter the number"><br><br><br>
+        <button id="check">check</button><br><br><br>
+        <div id="result">result</div>
+    </div>
+  <script>
+    document.getElementById("check").addEventListener("click",checknumber)
+    function checknumber(){
+    const number=document.getElementById("number").value
+    const result=document.getElementById("result")
+     if (!number) {
+                result.innerText = "Please enter a number";
+                return;}
+    fetch(`http://localhost:3000/check?n=${number}`)
+    .then((response)=>response.json())
+    .then((data)=>{
+        result.innerText=data.result
+    })
+    }
+    //  document.getElementById("check").addEventListener("click", function () {
+    //         const number = document.getElementById("number").value;
+    //         const result = document.getElementById("result");
+
+    //         console.log("clicked");
+
+    //         if (!number) {
+    //             result.innerText = "Please enter a number";
+    //             return;
+    //         }
+
+    //         fetch(`http://localhost:3000/check?n=${number}`)
+    //             .then(res => res.json())
+    //             .then(data => {
+    //                 console.log(data);
+    //                 result.innerText = data.result;
+    //             })
+    //             .catch(err => {
+    //                 console.error(err);
+    //                 result.innerText = "Error";
+    //             });
+    //     });
+    </script>
+</body>
